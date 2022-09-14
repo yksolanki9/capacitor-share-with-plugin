@@ -18,57 +18,37 @@ import java.io.IOException;
 @CapacitorPlugin(name = "Example")
 public class ExamplePlugin extends Plugin {
 
-//    private Example implementation = new Example();
-//
-//    @PluginMethod
-//    public void echo(PluginCall call) {
-//        String value = call.getString("value");
-//
-//        JSObject ret = new JSObject();
-//        ret.put("value", implementation.echo(value));
-//        call.resolve(ret);
-//    }
-
-//    @Override
-//    public void load() {
-////        Intent intent = new Intent();
-////
-////        String intentAction = intent.getAction();
-////        String intentType = intent.getType();
-////
-////        if(Intent.ACTION_SEND.equals(intentAction) && intentType.startsWith("image")) {
-////            Log.d("test", intentType);
-////            Uri imageUri = intent.getParcelableExtra(Intent.EXTRA_STREAM);
-////            JSObject ret = new JSObject();
-////            ret.put("imageUri", imageUri);
-////            notifyListeners("imageShared", ret);
-////
-////            Log.d("SOLANKI", "EVENT MENE FEK DIYA");
-////
-//////            getActivity().startActivity(intent);
-////        }
-//    }
-
     @Override
     protected void handleOnNewIntent(Intent intent) {
         super.handleOnNewIntent(intent);
 
-        Log.d("SOLANKI", "EVENT MENE FEK DIYA");
-
-        // read intent
         String action = intent.getAction();
-//        Uri url = intent.getData();
-
         Uri imageUri = intent.getParcelableExtra(Intent.EXTRA_STREAM);
 
         if (!Intent.ACTION_SEND.equals(action) || imageUri == null) {
             return;
         }
 
+        String base64EncodedString = getBase64FromPath(imageUri.toString());
+
         JSObject ret = new JSObject();
-        ret.put("url", imageUri.toString());
+        ret.put("base64Image", base64EncodedString);
         notifyListeners("imageShared", ret, true);
 
     }
 
+    public static String getBase64FromPath(String path) {
+        String base64 = "";
+        try {
+            File file = new File(path);
+            byte[] buffer = new byte[(int) file.length() + 100];
+            @SuppressWarnings("resource")
+            int length = new FileInputStream(file).read(buffer);
+            base64 = Base64.encodeToString(buffer, 0, length,
+                    Base64.DEFAULT);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return base64;
+    }
 }
