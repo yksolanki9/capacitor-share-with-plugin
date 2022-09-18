@@ -1,4 +1,4 @@
-package com.mycompany.plugins.example;
+package com.capacitor.plugins.sharewithplugin;
 
 import android.content.Intent;
 import android.graphics.Bitmap;
@@ -8,15 +8,13 @@ import android.util.Base64;
 
 import com.getcapacitor.JSObject;
 import com.getcapacitor.Plugin;
-import com.getcapacitor.PluginCall;
-import com.getcapacitor.PluginMethod;
 import com.getcapacitor.annotation.CapacitorPlugin;
 
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 
-@CapacitorPlugin(name = "Example")
-public class ExamplePlugin extends Plugin {
+@CapacitorPlugin(name = "ShareWith")
+public class ShareWithPlugin extends Plugin {
 
     @Override
     protected void handleOnNewIntent(Intent intent) {
