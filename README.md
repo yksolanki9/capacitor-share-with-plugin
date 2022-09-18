@@ -13,25 +13,37 @@ npx cap sync
 
 <docgen-index>
 
-* [`echo(...)`](#echo)
+* [`addListener('imageShared', ...)`](#addlistenerimageshared)
+* [Interfaces](#interfaces)
 
 </docgen-index>
 
 <docgen-api>
 <!--Update the source file JSDoc comments and rerun docgen to update the docs below-->
 
-### echo(...)
+### addListener('imageShared', ...)
 
 ```typescript
-echo(options: { value: string; }) => Promise<{ value: string; }>
+addListener(eventName: 'imageShared', listenerFunc: (event: any) => void) => Promise<PluginListenerHandle> & PluginListenerHandle
 ```
 
-| Param         | Type                            |
-| ------------- | ------------------------------- |
-| **`options`** | <code>{ value: string; }</code> |
+| Param              | Type                                 | Description                                           |
+| ------------------ | ------------------------------------ | ----------------------------------------------------- |
+| **`eventName`**    | <code>'imageShared'</code>           | - Name of the event to listen to                      |
+| **`listenerFunc`** | <code>(event: any) =&gt; void</code> | - The callback that is executed when the event occurs |
 
-**Returns:** <code>Promise&lt;{ value: string; }&gt;</code>
+**Returns:** <code>Promise&lt;<a href="#pluginlistenerhandle">PluginListenerHandle</a>&gt; & <a href="#pluginlistenerhandle">PluginListenerHandle</a></code>
 
 --------------------
+
+
+### Interfaces
+
+
+#### PluginListenerHandle
+
+| Prop         | Type                                      |
+| ------------ | ----------------------------------------- |
+| **`remove`** | <code>() =&gt; Promise&lt;void&gt;</code> |
 
 </docgen-api>

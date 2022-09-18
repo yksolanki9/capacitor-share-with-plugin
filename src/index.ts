@@ -1,10 +1,10 @@
 import { registerPlugin } from '@capacitor/core';
 
-import type { ExamplePlugin } from './definitions';
+import type { ShareWithPlugin } from './definitions';
 
-const Example = registerPlugin<ExamplePlugin>('Example', {
+const ShareWith = registerPlugin<ShareWithPlugin>('Example', {
   web: () => import('./web').then(m => new m.ExampleWeb()),
 });
 
 export * from './definitions';
-export { Example };
+export { ShareWith };
