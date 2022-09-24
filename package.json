@@ -1,5 +1,5 @@
 {
-  "name": "share-with",
+  "name": "capacitor-share-with-plugin",
   "version": "0.0.1",
   "description": "This plugin enables you to share images and pdfs with your capacitor app",
   "main": "dist/plugin.cjs.js",
