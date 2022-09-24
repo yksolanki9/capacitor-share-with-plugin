@@ -1,5 +1,6 @@
 package com.capacitor.plugins.sharewithplugin;
 
+import android.content.ContentResolver;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.net.Uri;
@@ -12,6 +13,8 @@ import com.getcapacitor.annotation.CapacitorPlugin;
 
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
+import java.util.HashMap;
+import java.util.Map;
 
 @CapacitorPlugin(name = "ShareWith")
 public class ShareWithPlugin extends Plugin {
@@ -27,29 +30,40 @@ public class ShareWithPlugin extends Plugin {
             return;
         }
 
-        String base64EncodedString = getBase64StringFromUri(imageUri);
+        Map<String, String> imageData = getImageDataFromUri(imageUri);
 
         JSObject ret = new JSObject();
-        ret.put("base64Image", base64EncodedString);
-        notifyListeners("imageShared", ret, true);
 
+        for (Map.Entry<String, String> entry : imageData.entrySet()) {
+            ret.put(entry.getKey(), entry.getValue());
+        }
+
+        notifyListeners("imageShared", ret, true);
     }
 
-    public String getBase64StringFromUri(Uri uri) {
-        String base64String = "";
+    public Map<String, String> getImageDataFromUri(Uri uri) {
+        Map<String, String> imageData = new HashMap<>();
+
         try {
-            Bitmap bitmap = MediaStore.Images.Media.getBitmap(getContext().getContentResolver(), uri);
+            ContentResolver contentResolver = getContext().getContentResolver();
 
+            Bitmap bitmap = MediaStore.Images.Media.getBitmap(contentResolver, uri);
             ByteArrayOutputStream stream = new ByteArrayOutputStream();
-
             bitmap.compress(Bitmap.CompressFormat.JPEG, 100, stream);
-
             byte[] bytes = stream.toByteArray();
+            String imageBase64 = "data:image/jpeg;base64," + Base64.encodeToString(bytes, Base64.DEFAULT);
 
-            base64String = "data:image/jpg;base64," + Base64.encodeToString(bytes, Base64.DEFAULT);
+            String imageType = contentResolver.getType(uri);
+            String[] imageTypeArr = imageType.split("/");
+            String imageExt = imageTypeArr.length > 1 ? imageTypeArr[1] : "";
+
+            imageData.put("base64", imageBase64);
+            imageData.put("uri", uri.toString());
+            imageData.put("ext", imageExt);
         } catch (IOException e) {
             e.printStackTrace();
         }
-        return base64String;
+
+        return imageData;
     }
 }
