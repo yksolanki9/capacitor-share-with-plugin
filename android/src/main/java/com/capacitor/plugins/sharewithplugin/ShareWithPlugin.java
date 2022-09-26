@@ -8,6 +8,7 @@ import com.getcapacitor.JSObject;
 import com.getcapacitor.Plugin;
 import com.getcapacitor.annotation.CapacitorPlugin;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -17,23 +18,42 @@ public class ShareWithPlugin extends Plugin {
     @Override
     protected void handleOnNewIntent(Intent intent) {
         super.handleOnNewIntent(intent);
-
         String action = intent.getAction();
-        Uri imageUri = intent.getParcelableExtra(Intent.EXTRA_STREAM);
 
-        if (!Intent.ACTION_SEND.equals(action) || imageUri == null) {
+        if (!Intent.ACTION_SEND.equals(action) && !Intent.ACTION_SEND_MULTIPLE.equals(action)) {
             return;
         }
 
-        Map<String, String> imageData = getImageDataFromUri(imageUri);
+        if(Intent.ACTION_SEND.equals(action)) {
+            Uri imageUri = intent.getParcelableExtra(Intent.EXTRA_STREAM);
+            if(imageUri == null) {
+                return;
+            }
 
-        JSObject ret = new JSObject();
+            Map<String, String> imageData = getImageDataFromUri(imageUri);
+            JSObject ret = new JSObject();
+            for (Map.Entry<String, String> entry : imageData.entrySet()) {
+                ret.put(entry.getKey(), entry.getValue());
+            }
+            notifyListeners("FILE_SINGLE", ret, true);
+        } else {
+            ArrayList<Uri> imageUriArray = intent.getParcelableArrayListExtra(Intent.EXTRA_STREAM);
 
-        for (Map.Entry<String, String> entry : imageData.entrySet()) {
-            ret.put(entry.getKey(), entry.getValue());
+            if(imageUriArray == null) {
+                return;
+            }
+
+            JSObject retArray = new JSObject();
+            for(int i = 0; i < imageUriArray.size(); i++) {
+                Map<String, String> imageData = getImageDataFromUri(imageUriArray.get(i));
+                JSObject ret = new JSObject();
+                for (Map.Entry<String, String> entry : imageData.entrySet()) {
+                    ret.put(entry.getKey(), entry.getValue());
+                }
+                retArray.put(Integer.toString(i), ret);
+            }
+            notifyListeners("FILE_MULTIPLE", retArray, true);
         }
-
-        notifyListeners("FILE_SINGLE", ret, true);
     }
 
     public Map<String, String> getImageDataFromUri(Uri uri) {

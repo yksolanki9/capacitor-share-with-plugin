@@ -10,5 +10,5 @@ export interface ShareWithPlugin {
    * @param eventName {string} - Name of the event to listen to
    * @param {listenerFunc} listenerFunc - The callback that is executed when the event occurs 
    */
-  addListener(eventName: 'FILE_SINGLE', listenerFunc: (event: any) => void): Promise<PluginListenerHandle> & PluginListenerHandle;
+  addListener(eventName: 'FILE_SINGLE' | 'FILE_MULTIPLE', listenerFunc: (event: any) => void): Promise<PluginListenerHandle> & PluginListenerHandle;
 }
