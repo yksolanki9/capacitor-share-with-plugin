@@ -33,7 +33,7 @@ public class ShareWithPlugin extends Plugin {
             ret.put(entry.getKey(), entry.getValue());
         }
 
-        notifyListeners("imageShared", ret, true);
+        notifyListeners("FILE_SINGLE", ret, true);
     }
 
     public Map<String, String> getImageDataFromUri(Uri uri) {
