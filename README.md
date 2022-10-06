@@ -1,5 +1,8 @@
 # capacitor-share-with-plugin
 
+[![NPM Version](https://img.shields.io/npm/v/capacitor-share-with-plugin.svg?style=for-the-badge)](https://npmjs.org/package/capacitor-share-with-plugin)
+[![NPM Downloads](https://img.shields.io/npm/dt/capacitor-share-with-plugin.svg?style=for-the-badge)](https://www.npmjs.com/package/capacitor-share-with-plugin)
+
 This plugin allows you to share files from the device's file explorer to any capacitor app.
 
 ## Install
