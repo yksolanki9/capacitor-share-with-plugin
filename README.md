@@ -47,10 +47,10 @@ Inside `AndroidManifest.xml`, in the `activity` element, add a `intent-filter` t
 addListener(eventName: 'FILE_SINGLE', listenerFunc: (event: FileDetails) => void) => Promise<PluginListenerHandle> & PluginListenerHandle
 ```
 
-| Param              | Type                                                                    | Description                                          |
-| ------------------ | ----------------------------------------------------------------------- | ---------------------------------------------------- |
-| **`eventName`**    | <code>'FILE_SINGLE'</code>                                              | Name of the event to listen.                         |
-| **`listenerFunc`** | <code>(event: <a href="#filedetails">FileDetails</a>) =&gt; void</code> | The callback that is executed when the event occurs. |
+| Param              | Type                                                                    | Description                                    |
+| ------------------ | ----------------------------------------------------------------------- | ---------------------------------------------- |
+| **`eventName`**    | <code>'FILE_SINGLE'</code>                                              | Name of the event to listen.                   |
+| **`listenerFunc`** | <code>(event: <a href="#filedetails">FileDetails</a>) =&gt; void</code> | Callback to be executed when the event occurs. |
 
 **Returns:** <code>Promise&lt;<a href="#pluginlistenerhandle">PluginListenerHandle</a>&gt; & <a href="#pluginlistenerhandle">PluginListenerHandle</a></code>
 
@@ -63,10 +63,10 @@ addListener(eventName: 'FILE_SINGLE', listenerFunc: (event: FileDetails) => void
 addListener(eventName: 'FILE_MULTIPLE', listenerFunc: (event: FileDetails[]) => void) => Promise<PluginListenerHandle> & PluginListenerHandle
 ```
 
-| Param              | Type                                           | Description                                          |
-| ------------------ | ---------------------------------------------- | ---------------------------------------------------- |
-| **`eventName`**    | <code>'FILE_MULTIPLE'</code>                   | Name of the event to listen.                         |
-| **`listenerFunc`** | <code>(event: FileDetails[]) =&gt; void</code> | The callback that is executed when the event occurs. |
+| Param              | Type                                           | Description                                    |
+| ------------------ | ---------------------------------------------- | ---------------------------------------------- |
+| **`eventName`**    | <code>'FILE_MULTIPLE'</code>                   | Name of the event to listen.                   |
+| **`listenerFunc`** | <code>(event: FileDetails[]) =&gt; void</code> | Callback to be executed when the event occurs. |
 
 **Returns:** <code>Promise&lt;<a href="#pluginlistenerhandle">PluginListenerHandle</a>&gt; & <a href="#pluginlistenerhandle">PluginListenerHandle</a></code>
 
