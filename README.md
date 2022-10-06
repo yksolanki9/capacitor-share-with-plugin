@@ -1,20 +1,22 @@
-# share-with
+# capacitor-share-with-plugin
 
-This plugin enables you to share images and pdfs with your capacitor app
+This plugin allows you to share files from your device's file explorer with your capacitor app
 
 ## Install
 
 ```bash
-npm install share-with
-npx cap sync
+npm install capacitor-share-with-plugin
+npx cap sync android
 ```
 
 ## API
 
 <docgen-index>
 
-* [`addListener('FILE_SINGLE' | 'FILE_MULTIPLE', ...)`](#addlistenerfile_single--file_multiple)
-* [Interfaces](#interfaces)
+- [capacitor-share-with-plugin](#capacitor-share-with-plugin)
+  - [Install](#install)
+  - [API](#api)
+    - [addListener('FILE_SINGLE' | 'FILE_MULTIPLE', ...)](#addlistenerfile_single--file_multiple-)
 
 </docgen-index>
 
@@ -35,15 +37,5 @@ addListener(eventName: 'FILE_SINGLE' | 'FILE_MULTIPLE', listenerFunc: (event: an
 **Returns:** <code>Promise&lt;<a href="#pluginlistenerhandle">PluginListenerHandle</a>&gt; & <a href="#pluginlistenerhandle">PluginListenerHandle</a></code>
 
 --------------------
-
-
-### Interfaces
-
-
-#### PluginListenerHandle
-
-| Prop         | Type                                      |
-| ------------ | ----------------------------------------- |
-| **`remove`** | <code>() =&gt; Promise&lt;void&gt;</code> |
 
 </docgen-api>
